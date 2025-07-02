@@ -1,3 +1,7 @@
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 public static class Arrays
 {
     /// <summary>
@@ -6,14 +10,26 @@ public static class Arrays
     /// integer greater than 0.
     /// </summary>
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
+
+
+
     public static double[] MultiplesOf(double number, int length)
     {
         // TODO Problem 1 Start
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
-
-        return []; // replace this return statement with your own
+        // 1. Create array with length
+        double[] multiples = new double[length];
+        // 2. iterate from 0 to length -1
+        for (int i = 0; i < length; i++)
+        {
+            // 3. calculate the current multiple and store it in the array
+            multiples[i] = number * (i + 1);
+        }
+        Debug.WriteLine("MultiplesOf result: " + string.Join(",", multiples));
+        // 4. return the array of multiples
+        return multiples; // replace this return statement with your own
     }
 
     /// <summary>
@@ -29,5 +45,24 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // Step 1: Calculate the effective rotation amount to handle cases where amount == data.Count
+    int rotation = amount % data.Count;
+
+    // Step 2: Use GetRange to split the list into two parts
+    List<int> endSegment = data.GetRange(data.Count - rotation, rotation);
+    List<int> startSegment = data.GetRange(0, data.Count - rotation);
+
+    // Step 3: Clear the original list to prepare for rearranging
+    data.Clear();
+
+    // Step 4: Add the rotated endSegment first
+    data.AddRange(endSegment);
+
+    // Step 5: Then add the startSegment
+    data.AddRange(startSegment);
+
+    // Debug output to show the rotated list
+    Debug.WriteLine("RotateListRight result: " + string.Join(", ", data));
     }
 }
